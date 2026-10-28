@@ -160,52 +160,112 @@ body{display:flex;flex-direction:column}
  .mstat{margin-left:0;width:100%;justify-content:space-between;text-align:left;gap:10px}
  .mstat .v{font-size:15px}}
 .mmuat.on{display:block}
-.mwrap{flex:1;position:relative;min-height:320px}
+.mwrap{flex:1;position:relative;min-height:320px;--lw:300px}
 #peta{position:absolute;inset:0;background:#0b0e13}
-.peta-legend{background:linear-gradient(160deg,rgba(22,27,34,.97),rgba(13,17,23,.94));
- border:1px solid #3d444d;border-radius:12px;box-shadow:0 8px 28px #000a;
- padding:10px 13px 11px;color:#c9d1d9;font-size:12px;user-select:none;min-width:172px}
-.peta-legend .lg-h{display:flex;align-items:center;justify-content:space-between;gap:12px;
- font-size:9.5px;letter-spacing:.2em;color:#8b949e;border-bottom:1px solid #30363d;
- padding:0 0 7px;margin-bottom:5px;cursor:default}
-.peta-legend .lg-h button{background:#21262d;border:1px solid #3d444d;color:#c9d1d9;
- font:inherit;font-size:9px;letter-spacing:.05em;border-radius:20px;padding:3px 9px;
- cursor:pointer;margin-left:5px;white-space:nowrap}
-.peta-legend .lg-h button:hover{background:#30363d;border-color:#58a6ff}
-.peta-legend div{cursor:pointer;display:flex;align-items:center;gap:9px;padding:4px 0}
-.peta-legend [data-l]{cursor:grab;border-radius:7px;padding:5px 7px;margin:1px -7px;min-height:26px}
-.peta-legend [data-l]::after{content:'⋮';margin-left:auto;color:#3d444d;font-size:12px}
-.peta-legend [data-l]:hover::after{color:#8b949e}
-.peta-legend [data-l]:hover{background:#ffffff0d}
-.peta-legend [data-l].seret{opacity:.35;background:#58a6ff22}
-.peta-legend [data-l]:active{cursor:grabbing}
-.leaflet-control-layers{background:linear-gradient(160deg,rgba(22,27,34,.97),rgba(13,17,23,.94));
- border:1px solid #3d444d;border-radius:12px;color:#c9d1d9;box-shadow:0 8px 28px #000a}
-.leaflet-control-layers-expanded{padding:10px 14px;font:12px 'JetBrains Mono','Consolas',monospace;color:#c9d1d9}
-.leaflet-control-layers-toggle{width:40px;height:40px;border-radius:12px;
- background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 25'%3E%3Cpath d='M12 2 22 8 12 14 2 8Z' fill='%2300e5ff'/%3E%3Cpath d='M2 13 12 19 22 13' fill='none' stroke='%23FFD600' stroke-width='2.6' stroke-linejoin='round'/%3E%3Cpath d='M2 18 12 24 22 18' fill='none' stroke='%23ff5252' stroke-width='2.6' stroke-linejoin='round'/%3E%3C/svg%3E");background-size:24px 25px}
-.leaflet-control-layers-separator{border-color:#30363d}
-.leaflet-control-layers label{color:#c9d1d9}
-.peta-legend div.mati{opacity:.45}
-.peta-legend .cb{width:13px;height:13px;border:1px solid #4a5361;border-radius:3px;
- position:relative;flex:0 0 auto;background:#0d1117}
-.peta-legend div:not(.mati) .cb{background:#16351f;border-color:#3fb950}
-.peta-legend div:not(.mati) .cb::after{content:'';position:absolute;left:4px;top:1px;
- width:3px;height:7px;border:solid #3fb950;border-width:0 2px 2px 0;transform:rotate(45deg)}
-.peta-legend i{display:inline-block;width:24px;height:3px;border-radius:2px;flex:0 0 auto}
-.peta-legend i.dash{background:repeating-linear-gradient(90deg,#0b0d10 0 6px,#ffffff 6px 12px);
-height:4px;border:0;border-radius:2px}
-.peta-legend i.pmleg{background:none;width:24px;height:auto;font-size:13px;font-style:normal;
- text-align:center;line-height:1}
+/* --- rel ikon kiri + laci panel: Layers / Actual by Batch / Legend --- */
+.rel{position:absolute;top:12px;left:12px;z-index:1100;display:flex;flex-direction:column;gap:4px;padding:6px;
+ background:linear-gradient(160deg,rgba(22,27,34,.97),rgba(13,17,23,.94));border:1px solid #3d444d;
+ border-radius:12px;box-shadow:0 8px 28px #000a;transition:left .22s ease}
+.mwrap.laci-buka .rel{left:calc(20px + var(--lw))}
+.rel button{position:relative;width:38px;height:38px;border:0;border-radius:9px;background:none;color:#c9d1d9;
+ cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0}
+.rel button:hover{background:#ffffff14;color:#fff}
+.rel button.on{background:#16351f;color:#3fb950;box-shadow:inset 0 0 0 1px #3fb95066}
+.rel button svg{width:19px;height:19px}
+.rel button[data-tip]:hover::after{content:attr(data-tip);position:absolute;left:calc(100% + 13px);top:50%;
+ transform:translateY(-50%);background:#0d1117;color:#e6edf3;border:1px solid #3d444d;padding:5px 10px;
+ border-radius:7px;font:12px 'Segoe UI',system-ui,sans-serif;white-space:nowrap;box-shadow:0 4px 14px #000a;
+ pointer-events:none}
+.rel .badge{position:absolute;top:1px;right:1px;min-width:15px;height:15px;padding:0 4px;border-radius:8px;
+ background:#3fb950;color:#0d1117;font:700 9.5px/15px 'Segoe UI',sans-serif;text-align:center}
+.laci{position:absolute;top:12px;left:12px;bottom:12px;width:var(--lw);z-index:1100;display:none;
+ flex-direction:column;background:linear-gradient(160deg,rgba(22,27,34,.98),rgba(13,17,23,.96));
+ border:1px solid #3d444d;border-radius:12px;box-shadow:0 10px 32px #000c;color:#c9d1d9;overflow:hidden;
+ font:12.5px/1.4 'Segoe UI',system-ui,sans-serif}
+.mwrap.laci-buka .laci{display:flex}
+.mwrap.laci-legend .laci{bottom:auto;max-height:calc(100% - 24px)}
+.laci-h{display:flex;align-items:center;gap:9px;padding:12px 12px 11px 14px;border-bottom:1px solid #30363d;flex:0 0 auto}
+.laci-h svg{width:17px;height:17px;color:#3fb950;display:block}
+.laci-h b{flex:1;font-size:14px;font-weight:600;color:#e6edf3}
+.laci-h .chip{font:700 10px/1 'Cascadia Code','Consolas',monospace;color:#3fb950;background:#16351f;
+ border:1px solid #3fb95066;border-radius:20px;padding:3px 8px;white-space:nowrap}
+.laci-h button{background:none;border:0;color:#8b949e;font-size:21px;line-height:1;cursor:pointer;padding:0 3px}
+.laci-h button:hover{color:#fff}
+.laci section{display:none;flex:1;min-height:0;flex-direction:column}
+.laci section.on{display:flex}
+.laci .alat{display:flex;align-items:center;gap:6px;padding:10px 14px 6px;flex:0 0 auto}
+.laci .alat button{background:#21262d;border:1px solid #3d444d;color:#c9d1d9;font:inherit;font-size:10.5px;
+ border-radius:20px;padding:3px 11px;cursor:pointer;white-space:nowrap}
+.laci .alat button:hover{background:#30363d;border-color:#58a6ff}
+.laci .alat .tip,.laci .alat label{margin-left:auto;font-size:10.5px;color:#8b949e;white-space:nowrap}
+.laci .alat label{display:flex;align-items:center;gap:5px;cursor:pointer}
+.laci .alat input{accent-color:#3fb950;margin:0;cursor:pointer}
+.laci .daftar{flex:1;min-height:0;overflow-y:auto;padding:4px 8px 10px}
+.laci .kaki{flex:0 0 auto;border-top:1px solid #30363d;padding:11px 14px 13px}
+.laci .kaki .jd{font-size:9.5px;letter-spacing:.2em;color:#8b949e;margin-bottom:8px}
+.laci .kaki.ket{font-size:10.5px;color:#6e7681;padding:9px 14px 11px}
+.laci .bm{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.laci .bm button{background:#0d1117;border:1px solid #3d444d;color:#c9d1d9;border-radius:9px;padding:9px 6px;
+ font:inherit;font-size:12px;cursor:pointer}
+.laci .bm button:hover{border-color:#58a6ff}
+.laci .bm button.on{background:#16351f;border-color:#3fb950;color:#3fb950;font-weight:600}
+.laci .ly{display:flex;align-items:center;gap:9px;padding:7px 6px 7px 8px;border-radius:9px;cursor:pointer;
+ border:1px solid #ffffff0a;margin-bottom:4px;background:#ffffff06;user-select:none}
+.laci .ly:hover{background:#ffffff0f;border-color:#3d444d}
+.laci .ly.seret{opacity:.35;background:#58a6ff22}
+.laci .ly .grip{color:#4a5361;cursor:grab;font-size:12px;letter-spacing:-3px;line-height:1;padding-right:3px}
+.laci .ly .grip:active{cursor:grabbing}
+.laci .ly .nm{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px}
+.laci .ly .nm b{font-weight:600;color:#e6edf3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.laci .ly .nm em{font-style:normal;font-size:9px;letter-spacing:.14em;color:#3fb950}
+.laci .ly .nm .sub{display:flex;align-items:center;gap:8px;min-width:0}
+.laci .ly .nm .sub .meta{margin-left:auto}
+.laci .ly .meta{font:10.5px 'Cascadia Code','Consolas',monospace;color:#8b949e;white-space:nowrap}
+.laci .ly.mati .nm b{color:#8b949e}
+.laci .ly.mati .nm em{color:#4a5361}
+.laci .ly.mati .sw{opacity:.4}
+.laci .cb{width:14px;height:14px;border:1px solid #4a5361;border-radius:4px;position:relative;flex:0 0 auto;
+ background:#0d1117}
+.laci .ly:not(.mati) .cb{background:#16351f;border-color:#3fb950}
+.laci .ly:not(.mati) .cb::after{content:'';position:absolute;left:4px;top:1px;width:3px;height:7px;
+ border:solid #3fb950;border-width:0 2px 2px 0;transform:rotate(45deg)}
+.laci .zl{flex:0 0 auto;width:28px;height:28px;border:1px solid transparent;border-radius:7px;background:none;
+ color:#8b949e;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0}
+.laci .zl:hover{color:#e6edf3;border-color:#3d444d;background:#21262d}
+.laci .zl svg{width:15px;height:15px}
+.laci .info{padding:12px 6px;color:#8b949e}
+.sw{display:inline-block;width:24px;height:3px;border-radius:2px;flex:0 0 auto}
+.sw.dash{background:repeating-linear-gradient(90deg,#0b0d10 0 6px,#ffffff 6px 12px);height:4px}
+.sw.pt{background:none;height:auto;font-size:13px;font-style:normal;text-align:center;line-height:1}
+.sw-lbl{flex:0 0 auto;font-size:10px;font-weight:700;color:#fff;background:rgba(9,12,17,.85);
+ border:1px solid rgba(255,255,255,.32);border-radius:5px;padding:1px 6px}
+.lg-g{padding:6px 6px 8px}
+.lg-g+.lg-g{border-top:1px solid #21262d}
+.lg-g .jd{font-size:9.5px;letter-spacing:.2em;color:#8b949e;text-transform:uppercase;margin:6px 0 4px}
+.lg-i{display:flex;align-items:center;gap:10px;padding:4px 0;color:#c9d1d9}
+.lg-i em{margin-left:auto;font:10.5px 'Cascadia Code','Consolas',monospace;color:#8b949e;font-style:normal}
+.lg-i.mati{opacity:.4}
+.lg-i .pm-mini{margin:0 3px}
+.toast{position:absolute;left:50%;bottom:24px;transform:translate(-50%,8px);opacity:0;z-index:1200;
+ background:#0d1117;color:#e6edf3;border:1px solid #3d444d;border-radius:9px;padding:8px 14px;
+ font:12px 'Segoe UI',system-ui,sans-serif;box-shadow:0 6px 20px #000a;pointer-events:none;transition:all .2s}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+/* --- kontrol kanan-bawah: zoom to area + zoom in/out --- */
+.mwrap .leaflet-bottom.leaflet-right .leaflet-bar{margin-right:14px;border:1px solid #3d444d !important;
+ border-radius:11px;overflow:hidden;box-shadow:0 6px 20px #000a;background:rgba(22,27,34,.96)}
+.mwrap .leaflet-bottom.leaflet-right .leaflet-bar a{width:38px;height:38px;line-height:38px;background:transparent;
+ color:#e6edf3;border-bottom:1px solid #30363d;font:400 20px/38px 'Segoe UI',sans-serif;border-radius:0;
+ display:flex;align-items:center;justify-content:center}
+.mwrap .leaflet-bottom.leaflet-right .leaflet-bar a:last-child{border-bottom:0}
+.mwrap .leaflet-bottom.leaflet-right .leaflet-bar a:hover{background:#30363d;color:#fff}
+.mwrap .leaflet-bottom.leaflet-right .leaflet-bar a.leaflet-disabled{color:#4a5361;background:transparent}
+.mwrap .leaflet-bottom.leaflet-right .leaflet-bar.peta-area{border-radius:50%}
+.peta-area svg{width:19px;height:19px}
 .pm-badge{width:28px;height:28px;border-radius:50%;background:#11151c;border:2.5px solid #90a4ae;
 display:flex;align-items:center;justify-content:center;font-size:14px;line-height:1;
 box-shadow:0 1px 6px rgba(0,0,0,.65);position:relative}
 .pm-x{position:absolute;top:2px;right:-2px;font-size:11.5px;line-height:1;
 filter:drop-shadow(0 1px 2px rgba(0,0,0,.85))}
-.peta-legend .pm-sub{display:flex;flex-direction:column;gap:4px;padding:1px 0 6px 30px;cursor:default}
-.peta-legend .pm-sub .r{display:flex;align-items:center;gap:9px;font-size:10.5px;color:#aab4bf;
- min-height:18px}
-.peta-legend .pm-sub .pm-mini{flex:0 0 17px;box-sizing:content-box}
 .pm-mini{width:17px;height:17px;border-radius:50%;background:#11151c;border:1.5px solid #90a4ae;
 display:inline-flex;align-items:center;justify-content:center;font-size:9px;line-height:1;
 font-style:normal;position:relative;flex:0 0 auto}
@@ -227,46 +287,8 @@ border-radius:8px;box-shadow:0 6px 22px rgba(0,0,0,.55)}
  -webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);text-shadow:0 1px 2px #000}
 .adm-label.buffer span{text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000,
  0 -2px 0 #000,0 2px 0 #000,-2px 0 0 #000,2px 0 0 #000,0 0 6px #000,0 0 10px #000}
-.peta-batch{background:linear-gradient(160deg,rgba(22,27,34,.97),rgba(13,17,23,.94));
- border:1px solid #3d444d;border-radius:12px;box-shadow:0 8px 28px #000a;color:#c9d1d9;
- font-size:12px;user-select:none;width:236px;overflow:hidden}
-.peta-batch .pb-h{display:flex;align-items:center;gap:8px;padding:10px 13px;cursor:pointer;
- font-size:9.5px;letter-spacing:.2em;color:#8b949e}
-.peta-batch .pb-h:hover{color:#c9d1d9}
-.peta-batch .pb-t{flex:1;white-space:nowrap}
-.peta-batch .pb-n{font:700 10px/1 'Cascadia Code','Consolas',monospace;letter-spacing:0;color:#8b949e;
- background:#21262d;border:1px solid #3d444d;border-radius:20px;padding:3px 8px;white-space:nowrap}
-.peta-batch .pb-n.on{color:#3fb950;border-color:#3fb95066;background:#16351f}
-.peta-batch .pb-chev{font-size:10px;transition:transform .2s}
-.peta-batch.buka .pb-chev{transform:rotate(180deg)}
-.peta-batch .pb-isi{display:none;border-top:1px solid #30363d;padding:8px 13px 10px}
-.peta-batch.buka .pb-isi{display:block}
-.peta-batch .pb-aksi{display:flex;align-items:center;gap:6px;margin-bottom:5px}
-.peta-batch .pb-aksi button{background:#21262d;border:1px solid #3d444d;color:#c9d1d9;font:inherit;
- font-size:9.5px;letter-spacing:.05em;border-radius:20px;padding:3px 10px;cursor:pointer}
-.peta-batch .pb-aksi button:hover{background:#30363d;border-color:#58a6ff}
-.peta-batch .pb-aksi label{margin-left:auto;display:flex;align-items:center;gap:5px;font-size:10px;
- color:#8b949e;cursor:pointer;white-space:nowrap}
-.peta-batch .pb-aksi input{accent-color:#3fb950;margin:0;cursor:pointer}
-.peta-batch .pb-list{max-height:min(50vh,430px);overflow-y:auto;margin:0 -13px;padding:0 13px}
-.peta-batch .pb-r{display:flex;align-items:center;gap:9px;padding:5px 7px;margin:1px -7px;
- border-radius:7px;cursor:pointer;min-height:26px}
-.peta-batch .pb-r:hover{background:#ffffff0d}
-.peta-batch .pb-r.mati .pb-l{color:#8b949e}
-.peta-batch .pb-r i{display:inline-block;width:24px;height:3px;border-radius:2px;background:#3d444d;flex:0 0 auto}
-.peta-batch .pb-l{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.peta-batch .pb-km{font:11px 'Cascadia Code','Consolas',monospace;color:#8b949e;white-space:nowrap}
-.peta-batch .pb-r:not(.mati) .pb-km{color:#c9d1d9}
-.peta-batch .cb{width:13px;height:13px;border:1px solid #4a5361;border-radius:3px;position:relative;
- flex:0 0 auto;background:#0d1117}
-.peta-batch .pb-r:not(.mati) .cb{background:#16351f;border-color:#3fb950}
-.peta-batch .pb-r:not(.mati) .cb::after{content:'';position:absolute;left:4px;top:1px;width:3px;height:7px;
- border:solid #3fb950;border-width:0 2px 2px 0;transform:rotate(45deg)}
-.peta-batch .pb-info{font-size:11px;color:#8b949e;padding:6px 0}
-.peta-batch .pb-foot{font-size:9.5px;color:#6e7681;margin-top:7px;padding-top:6px;border-top:1px solid #30363d}
-.leaflet-top.leaflet-right{z-index:1001}   /* panel batch terbuka di atas legend kiri (layar sempit) */
-@media(max-width:900px){.peta-batch{width:204px}.peta-batch .pb-h{letter-spacing:.1em;padding:9px 11px}
- .peta-batch .pb-list{max-height:30vh}}
+@media(max-width:900px){.mwrap{--lw:min(290px,calc(100vw - 84px))}
+ .rel button[data-tip]:hover::after{display:none}}
 .mfoot{display:flex;gap:16px;padding:9px 22px;background:#0a0e13;border-top:1px solid #21262d;
  font-size:10px;letter-spacing:.12em;color:#8b949e;flex-wrap:wrap}
 .mfoot b{color:#c9d1d9;font-weight:600}
@@ -284,16 +306,36 @@ border-radius:8px;box-shadow:0 6px 22px rgba(0,0,0,.55)}
     <div><div class='l'>Target Net km</div><div class='v' style='color:#ff5252' id='s-tgt'>&ndash;</div></div>
   </div>
 </div>
-<div class='mwrap'><div id='peta'></div></div>
+<div class='mwrap' id='mwrap'><div id='peta'></div>
+  <nav class='rel' id='rel' aria-label='Map panels'></nav>
+  <aside class='laci' id='laci'>
+    <div class='laci-h'><span id='laci-ik'></span><b id='laci-jd'></b><span class='chip' id='laci-chip' hidden></span>
+      <button id='laci-x' title='Close' aria-label='Close'>&times;</button></div>
+    <section data-p='layer'>
+      <div class='alat'><button data-a='on'>Select All</button><button data-a='off'>Unselect All</button>
+        <span class='tip'>drag &#8942;&#8942; to reorder</span></div>
+      <div class='daftar' id='ly-list'></div>
+      <div class='kaki'><div class='jd'>BASEMAP</div><div class='bm' id='bm'></div></div>
+    </section>
+    <section data-p='batch'>
+      <div class='alat'><button data-a='all'>All</button><button data-a='none'>None</button>
+        <label><input type='checkbox' id='pb-dim' checked>Dim Actual</label></div>
+      <div class='daftar' id='pb-list'></div>
+      <div class='kaki ket'>off by default &middot; click a row to show / hide &middot; colors follow pick order</div>
+    </section>
+    <section data-p='legend'><div class='daftar' id='lg-list'></div></section>
+  </aside>
+  <div class='toast' id='toast'></div>
+</div>
 <div class='mfoot'>
   <span>MAPS &middot; map page &mdash; <b>no auto-refresh</b>, position &amp; zoom saved per area</span>
   <span>layers load per selected area (lazy) &middot; switching back is instant</span>
-  <span class='kanan'>data run 28 Oct 2026 11:43</span>
+  <span class='kanan'>data run 28 Oct 2026 15:40</span>
 </div>
 <script>
 (function(){
   var AREA = [{"kode": "jabodetabek", "nama": "JABODETABEK", "ada": true, "view": [-6.3, 106.85, 10], "net": "22,416.70", "unc": "21,461.61", "tgt": "39,492.33", "prog": "56.8%"}, {"kode": "bandung", "nama": "BANDUNG RAYA", "ada": true, "view": [-6.905, 107.61, 11], "net": "8,948.00", "unc": "8,747.92", "tgt": "14,849.83", "prog": "60.3%"}, {"kode": "surabaya", "nama": "SURABAYA", "ada": true, "view": [-7.28, 112.74, 12], "net": "2,804.05", "unc": "1,967.85", "tgt": "3,862.86", "prog": "72.6%"}];
-  var peta = L.map('peta', {preferCanvas:true});
+  var peta = L.map('peta', {preferCanvas:true, zoomControl:false});
   var PANE = {all:'paneAll', fc5:'paneFC5', fc4:'paneFC4', cov:'paneCov',
               uc:'paneUC', adm:'paneAdm', pm:'panePM'};
   Object.keys(PANE).forEach(function(k){ peta.createPane(PANE[k]); });
@@ -306,99 +348,215 @@ border-radius:8px;box-shadow:0 6px 22px rgba(0,0,0,.55)}
   peta.createPane('paneBatch');
   peta.getPane('paneBatch').style.zIndex = 451;           // di atas semua layer garis
   peta.getPane('paneBatch').style.pointerEvents = 'none';
-  var rBatch = L.canvas({pane:'paneBatch'}), pbDiv = null;
+  var rBatch = L.canvas({pane:'paneBatch'});
   function esc(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, function(ch){
     return {'&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'}[ch]; }); }
-  function susunPane(d){
-    var urut = [].slice.call(d.querySelectorAll('[data-l]')).map(function(x){ return x.dataset.l; });
+  function angka(n){ return (+n || 0).toLocaleString('en-US'); }
+  function svg(isi){ return "<svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.9' " +
+                            "stroke-linecap='round' stroke-linejoin='round'>" + isi + "</svg>"; }
+  var IKON = {
+    layer:  svg("<polygon points='12 2 2 7 12 12 22 7 12 2'/><polyline points='2 17 12 22 22 17'/>" +
+                "<polyline points='2 12 12 17 22 12'/>"),
+    batch:  svg("<polygon points='22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3'/>"),
+    legend: svg("<polygon points='1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6'/>" +
+                "<line x1='8' y1='2' x2='8' y2='18'/><line x1='16' y1='6' x2='16' y2='22'/>"),
+    zoom:   svg("<path d='M8 3H5a2 2 0 0 0-2 2v3M21 8V5a2 2 0 0 0-2-2h-3M16 21h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3'/>" +
+                "<circle cx='12' cy='12' r='2.5'/>"),
+    area:   svg("<circle cx='12' cy='12' r='8'/><circle cx='12' cy='12' r='2.5'/><line x1='12' y1='1.5' x2='12' y2='4'/>" +
+                "<line x1='12' y1='20' x2='12' y2='22.5'/><line x1='1.5' y1='12' x2='4' y2='12'/>" +
+                "<line x1='20' y1='12' x2='22.5' y2='12'/>")
+  };
+
+  /* basemap (pilihannya di kaki panel Layers) */
+  var basemaps = [["Satellite", "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}", "Imagery &copy; Esri &mdash; Maxar, Earthstar Geographics"], ["Streets", "https://tile.openstreetmap.org/{z}/{x}/{y}.png", "&copy; OpenStreetMap contributors"]], baseLayers = {}, baseAktif = null;
+  basemaps.forEach(function(b){ baseLayers[b[0]] = L.tileLayer(b[1], {attribution:b[2], maxZoom:19}); });
+  function pilihBase(nama){
+    if (!baseLayers[nama]) nama = basemaps[0][0];
+    if (baseAktif === nama) return;
+    if (baseAktif) peta.removeLayer(baseLayers[baseAktif]);
+    baseAktif = nama;
+    baseLayers[nama].addTo(peta);
+    try { sessionStorage.setItem('maps_base', nama); } catch(e){}
+    [].forEach.call(document.querySelectorAll('#bm button'), function(b){
+      b.classList.toggle('on', b.dataset.b === nama); });
+  }
+  peta.setView([-2.5, 118.0], 5);
+
+  /* kanan-bawah: zoom in/out + zoom to area (di atasnya) */
+  L.control.zoom({position:'bottomright', zoomInTitle:'Zoom in', zoomOutTitle:'Zoom out'}).addTo(peta);
+  var kArea = L.control({position:'bottomright'});
+  kArea.onAdd = function(){
+    var d = L.DomUtil.create('div', 'leaflet-bar peta-area');
+    d.innerHTML = "<a href='#' role='button' title='Zoom to area' aria-label='Zoom to area'>" + IKON.area + "</a>";
+    L.DomEvent.disableClickPropagation(d);
+    L.DomEvent.on(d.firstChild, 'click', function(e){ L.DomEvent.preventDefault(e); zoomArea(); });
+    return d;
+  };
+  kArea.addTo(peta);
+
+  /* rel ikon kiri + laci panel */
+  var mw = document.getElementById('mwrap'), rel = document.getElementById('rel'),
+      laci = document.getElementById('laci'), panelBuka = null, nBatch = [0, 0];
+  var PANEL = [['layer', 'Layers'], ['batch', 'Actual by Batch'], ['legend', 'Legend']]
+                .filter(function(p){ return p[0] !== 'batch' || BATCH_ON; });
+  if (!BATCH_ON){ laci.removeChild(laci.querySelector("section[data-p='batch']")); }
+  PANEL.forEach(function(p){
+    var b = document.createElement('button');
+    b.dataset.p = p[0]; b.dataset.tip = p[1]; b.setAttribute('aria-label', p[1]);
+    b.innerHTML = IKON[p[0]] + (p[0] === 'batch' ? "<span class='badge' id='pb-badge' hidden></span>" : '');
+    b.addEventListener('click', function(){ bukaLaci(panelBuka === p[0] ? null : p[0]); });
+    rel.appendChild(b);
+  });
+  function bukaLaci(p){
+    if (p && !PANEL.some(function(x){ return x[0] === p; })) p = null;
+    panelBuka = p;
+    mw.classList.toggle('laci-buka', !!p);
+    mw.classList.toggle('laci-legend', p === 'legend');
+    [].forEach.call(rel.children, function(b){ b.classList.toggle('on', b.dataset.p === p); });
+    [].forEach.call(laci.querySelectorAll('section'), function(s){ s.classList.toggle('on', s.dataset.p === p); });
+    if (p){
+      document.getElementById('laci-ik').innerHTML = IKON[p];
+      document.getElementById('laci-jd').textContent = PANEL.filter(function(x){ return x[0] === p; })[0][1];
+    }
+    setChip();
+    try { sessionStorage.setItem('maps_laci', p || ''); } catch(e){}
+  }
+  document.getElementById('laci-x').addEventListener('click', function(){ bukaLaci(null); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && panelBuka) bukaLaci(null); });
+  function setChip(){
+    var el = document.getElementById('laci-chip'), t = '';
+    if (panelBuka === 'layer'){
+      t = Object.keys(tampil).filter(function(k){ return tampil[k]; }).length + ' / ' + Object.keys(tampil).length + ' on';
+    } else if (panelBuka === 'batch' && nBatch[1]){ t = nBatch[0] + ' / ' + nBatch[1] + ' on'; }
+    el.textContent = t; el.hidden = !t;
+  }
+  var tToast = null;
+  function toast(t){
+    var el = document.getElementById('toast');
+    el.textContent = t; el.classList.add('on');
+    clearTimeout(tToast); tToast = setTimeout(function(){ el.classList.remove('on'); }, 2600);
+  }
+  function padFit(){   // ruang yang tertutup rel / laci (kiri) & kontrol zoom (kanan) tidak dipakai
+    var lebar = mw.clientWidth, kiri = rel.getBoundingClientRect().right - mw.getBoundingClientRect().left + 16;
+    if (panelBuka && lebar - kiri - 70 < Math.max(220, lebar * 0.35)){
+      bukaLaci(null);                         // layar sempit: laci menutupi peta -> ditutup dulu
+      kiri = 12 + rel.offsetWidth + 16;       // posisi rel setelah kembali ke kiri
+    }
+    return {paddingTopLeft:[kiri, 24], paddingBottomRight:[70, 24], maxZoom:17};
+  }
+
+  /* panel LAYERS: tampil/sembunyi, seret urutan, zoom to layer */
+  var tampil = {all:true, fc4:true, fc5:true, cov:true, adm:true, uc:true, pm:true};
+  var LAYER = {adm:['Admin Boundary', 'BOUNDARY', "<i class='sw dash'></i>"],
+               pm:['Placemark', 'POINT', "<i class='sw pt'>📍</i>"],
+               cov:['Actual', 'LINE', "<i class='sw' style='background:#00e5ff'></i>"],
+               uc:['Uncovered Cluster', 'LINE', "<i class='sw' style='background:#ffd600'></i>"],
+               all:['Plan All', 'LINE', "<i class='sw' style='background:#ff5252'></i>"],
+               fc4:['Plan FC4', 'LINE', "<i class='sw' style='background:#39FF14'></i>"],
+               fc5:['Plan FC5', 'LINE', "<i class='sw' style='background:#B388FF'></i>"]};
+  var lyList = document.getElementById('ly-list');
+  (function(){
+    var urut = ['adm', 'pm', 'cov', 'uc', 'all', 'fc4', 'fc5'];
+    try {   // pulihkan urutan layer sesi ini
+      var u = JSON.parse(sessionStorage.getItem('maps_lgorder') || 'null');
+      if (u && u.length === urut.length && urut.every(function(k){ return u.indexOf(k) >= 0; })) urut = u;
+    } catch(e){}
+    lyList.innerHTML = urut.map(function(k){
+      return "<div class='ly' data-l='" + k + "' draggable='true'>" +
+             "<span class='grip' title='drag to reorder'>&#8942;&#8942;</span><span class='cb'></span>" +
+             LAYER[k][2] + "<span class='nm'><b>" + LAYER[k][0] + "</b><span class='sub'><em>" + LAYER[k][1] +
+             "</em><span class='meta'></span></span></span>" +
+             "<button class='zl' title='Zoom to layer'>" + IKON.zoom + "</button></div>";
+    }).join('');
+  })();
+  function susunPane(){
+    var urut = [].slice.call(lyList.querySelectorAll('[data-l]')).map(function(x){ return x.dataset.l; });
     urut.forEach(function(k, i){
       peta.getPane(PANE[k]).style.zIndex = 450 - i * 4; });   // baris teratas = layer teratas
     try { sessionStorage.setItem('maps_lgorder', JSON.stringify(urut)); } catch(e){}
   }
-  var basemaps = [["Satellite", "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}", "Imagery &copy; Esri &mdash; Maxar, Earthstar Geographics"], ["Streets", "https://tile.openstreetmap.org/{z}/{x}/{y}.png", "&copy; OpenStreetMap contributors"]], baseLayers = {}, baseDefault = null;
-  basemaps.forEach(function(b, i){
-    baseLayers[b[0]] = L.tileLayer(b[1], {attribution:b[2], maxZoom:19});
-    if (i === 0) baseDefault = b[0];
+  susunPane();
+  laci.querySelector("section[data-p='layer'] .alat").addEventListener('click', function(e){
+    var t = e.target.closest('button'); if (!t) return;
+    Object.keys(tampil).forEach(function(k){ tampil[k] = t.dataset.a === 'on'; });
+    terapkanTampil();
   });
-  var basePilih = null;
-  try { basePilih = sessionStorage.getItem('maps_base'); } catch(e){}
-  (baseLayers[basePilih] || baseLayers[baseDefault]).addTo(peta);
-  L.control.layers(baseLayers, null, {position:'topright'}).addTo(peta);
-  peta.on('baselayerchange', function(e){
-    try { sessionStorage.setItem('maps_base', e.name); } catch(err){} });
-  peta.setView([-2.5, 118.0], 5);
+  lyList.addEventListener('click', function(e){
+    var r = e.target.closest('.ly'); if (!r || e.target.closest('.grip')) return;
+    if (e.target.closest('.zl')){ zoomLayer(r.dataset.l); return; }
+    tampil[r.dataset.l] = !tampil[r.dataset.l];
+    terapkanTampil();
+  });
+  var diseret = null;
+  lyList.addEventListener('dragstart', function(e){
+    diseret = e.target.closest('.ly');
+    if (diseret){ diseret.classList.add('seret');
+      try { e.dataTransfer.effectAllowed = 'move'; e.dataTransfer.setData('text/plain', diseret.dataset.l); } catch(er){} }
+  });
+  lyList.addEventListener('dragend', function(){
+    if (diseret) diseret.classList.remove('seret'); diseret = null; susunPane(); });
+  lyList.addEventListener('dragover', function(e){
+    if (!diseret) return; e.preventDefault();
+    var atas = e.target.closest('.ly');
+    if (!atas || atas === diseret) return;
+    var r = atas.getBoundingClientRect();
+    if (e.clientY < r.top + r.height / 2) lyList.insertBefore(diseret, atas);
+    else lyList.insertBefore(diseret, atas.nextSibling);
+  });
+  lyList.addEventListener('drop', function(e){ e.preventDefault(); susunPane(); });
+  var bmDiv = document.getElementById('bm');
+  bmDiv.innerHTML = basemaps.map(function(b){
+    return "<button data-b='" + esc(b[0]) + "'>" + esc(b[0]) + "</button>"; }).join('');
+  bmDiv.addEventListener('click', function(e){ var t = e.target.closest('button'); if (t) pilihBase(t.dataset.b); });
+  var baseTersimpan = null;
+  try { baseTersimpan = sessionStorage.getItem('maps_base'); } catch(e){}
+  pilihBase(baseTersimpan);
 
-  /* legend interaktif */
-  var tampil = {all:true, fc4:true, fc5:true, cov:true, adm:true, uc:true, pm:true};
-  var legend = L.control({position:'bottomleft'});
-  legend.onAdd = function(){
-    var d = L.DomUtil.create('div','peta-legend');
-    d.innerHTML = "<div class='lg-h'>LAYERS<span><button id='lg-all'>Select All</button><button id='lg-none'>Unselect All</button></span></div>" +
-                  "<div data-l='adm' draggable='true'><span class='cb'></span><i class='dash'></i>Admin Boundary</div>" +
-                  "<div data-l='pm' draggable='true'><span class='cb'></span><i class='pmleg'>📍</i>Placemark</div>" +
-                  "<div class='pm-sub' id='pm-sub'>" +
-                    "<span class='r'><b class='pm-mini' style='border-color:#ff5252'>🏍<i class='pm-xm'>💥</i></b>Traffic Accident</span>" +
-                    "<span class='r'><b class='pm-mini' style='border-color:#e040fb'>🚨</b>High-Crime Area</span>" +
-                  "</div>" +
-                  "<div data-l='cov' draggable='true'><span class='cb'></span><i style='background:#00e5ff'></i>Actual</div>" +
-                  "<div data-l='uc' draggable='true'><span class='cb'></span><i style='background:#ffd600'></i>Uncovered Cluster</div>" +
-                  "<div data-l='all' draggable='true'><span class='cb'></span><i style='background:#ff5252'></i>Plan All</div>" +
-                  "<div data-l='fc4' draggable='true'><span class='cb'></span><i style='background:#39FF14'></i>Plan FC4</div>" +
-                  "<div data-l='fc5' draggable='true'><span class='cb'></span><i style='background:#B388FF'></i>Plan FC5</div>";
-    L.DomEvent.disableClickPropagation(d);
-    try {   // pulihkan urutan layer sesi ini
-      var uT = JSON.parse(sessionStorage.getItem('maps_lgorder') || 'null');
-      if (uT && uT.length){
-        var sub = d.querySelector('#pm-sub');
-        uT.slice().reverse().forEach(function(k){
-          var b = d.querySelector("[data-l='" + k + "']");
-          if (b) d.insertBefore(b, d.children[1] || null);
-        });
-        var pmB = d.querySelector("[data-l='pm']");
-        if (sub && pmB) pmB.after(sub);
-      }
-    } catch(e){}
-    function setSemua(nyala){
-      Object.keys(tampil).forEach(function(k){ tampil[k] = nyala; });
-      [].forEach.call(d.querySelectorAll('[data-l]'), function(b){
-        b.classList.toggle('mati', !nyala); });
-      terapkanTampil();
+  function tiapTitik(grp, fn){   // marker di dalam group bertingkat (L.geoJSON di dalam featureGroup)
+    grp.eachLayer(function(l){ if (l.eachLayer){ tiapTitik(l, fn); } else { fn(l); } });
+  }
+  function metaLayer(c, k){
+    if (c.st[k] === 'muat') return 'loading…';
+    if (c.st[k] === 'tidak') return 'not available';
+    if (k === 'pm'){ var n = 0; tiapTitik(c.gPM, function(){ n++; }); return angka(n) + ' points'; }
+    if (k === 'adm') return angka(c.lblUrut.length) + ' regions';
+    if (k === 'cov' && c.batchUrut && c.batchUrut.length){
+      var km = 0; c.batchUrut.forEach(function(b){ km += c.batch[b].km; });
+      return angka(Math.round(km)) + ' km';
     }
-    d.querySelector('#lg-all').addEventListener('click', function(){ setSemua(true); });
-    d.querySelector('#lg-none').addEventListener('click', function(){ setSemua(false); });
-    d.addEventListener('click', function(e){
-      if (e.target.closest('.lg-h')) return;
-      var k = e.target.closest('[data-l]'); if(!k) return;
-      tampil[k.dataset.l] = !tampil[k.dataset.l];
-      k.classList.toggle('mati', !tampil[k.dataset.l]);
-      terapkanTampil();
+    return '';
+  }
+  function isiLayer(){
+    var c = aktif && cache[aktif];
+    [].forEach.call(lyList.children, function(r){
+      var k = r.dataset.l;
+      r.classList.toggle('mati', !tampil[k]);
+      r.querySelector('.meta').textContent = c ? metaLayer(c, k) : '';
     });
-    var diseret = null;
-    d.addEventListener('dragstart', function(e){
-      diseret = e.target.closest('[data-l]');
-      if (diseret) diseret.classList.add('seret');
-    });
-    d.addEventListener('dragend', function(){
-      if (diseret) diseret.classList.remove('seret'); diseret = null; });
-    d.addEventListener('dragover', function(e){
-      if (!diseret) return; e.preventDefault();
-      var atas = e.target.closest('[data-l]');
-      if (!atas || atas === diseret) return;
-      var r = atas.getBoundingClientRect();
-      if (e.clientY < r.top + r.height / 2) d.insertBefore(diseret, atas);
-      else d.insertBefore(diseret, atas.nextSibling);
-    });
-    d.addEventListener('drop', function(e){
-      e.preventDefault();
-      var sub = d.querySelector('#pm-sub'), pmB = d.querySelector("[data-l='pm']");
-      if (sub && pmB) pmB.after(sub);   // sub-daftar placemark selalu menempel barisnya
-      susunPane(d);
-    });
-    susunPane(d);
-    return d;
-  };
-  legend.addTo(peta);
-  /* panel ACTUAL BY BATCH (kanan-atas, terpisah dari legend kiri): default semua mati */
+  }
+  function grupLayer(c){
+    return {all:c.gAll, fc4:c.gFC4, fc5:c.gFC5, cov:c.gCov, uc:c.gUC, adm:c.gAdm, pm:c.gPM};
+  }
+  function zoomLayer(k){
+    var c = aktif && cache[aktif]; if (!c) return;
+    var g = grupLayer(c)[k], b = (g && g.getLayers().length) ? g.getBounds() : null;
+    if (!b || !b.isValid()){
+      toast(LAYER[k][0] + (c.st[k] === 'muat' ? ' is still loading' : ' has no data in this area')); return; }
+    if (!tampil[k]){ tampil[k] = true; terapkanTampil(); }
+    peta.fitBounds(b, padFit());
+  }
+  function zoomArea(){
+    var c = aktif && cache[aktif], a = AREA.filter(function(x){ return x.kode === aktif; })[0], b = null;
+    if (c){ [c.gAll, c.gCov, c.gAdm, c.gUC].forEach(function(g){
+      if (!g.getLayers().length) return;
+      var bb = g.getBounds(); if (!bb.isValid()) return;
+      b = b ? b.extend(bb) : L.latLngBounds(bb.getSouthWest(), bb.getNorthEast()); }); }
+    if (b){ peta.fitBounds(b, padFit()); }
+    else if (a){ peta.setView([a.view[0], a.view[1]], a.view[2]); }
+  }
+
+  /* panel ACTUAL BY BATCH: default semua mati */
+  var pbList = document.getElementById('pb-list');
   function namaBatch(k){ return /^[0-9]+$/.test(k) ? 'Batch ' + k : (k || 'No batch yet'); }
   function fmtKm(v){ return (+v || 0).toLocaleString('en-US', {minimumFractionDigits:2,
                                                               maximumFractionDigits:2}) + ' km'; }
@@ -407,7 +565,7 @@ border-radius:8px;box-shadow:0 6px 22px rgba(0,0,0,.55)}
       var p = f.properties || {};
       if (p.b === undefined || p.b === null) return;          // geojson lama: tanpa label batch
       var k = String(p.b), it = c.batch[k];
-      if (!it){ it = c.batch[k] = {feat:[], km:+p.kb || 0, nd:+p.nd || 0, on:false, w:null, layer:null}; }
+      if (!it){ it = c.batch[k] = {feat:[], km:+p.kb || 0, nd:+p.nd || 0, on:false, w:null, layer:null, bb:null}; }
       it.feat.push(f);
     });
   }
@@ -444,68 +602,65 @@ border-radius:8px;box-shadow:0 6px 22px rgba(0,0,0,.55)}
     it.on = nyala; it.w = null;
     if (nyala){ it.w = warnaBebas(c); it.layer = layerBatch(it); c.gBatch.addLayer(it.layer); }
   }
+  function batasFitur(fitur){      /* batas (bounds) kumpulan fitur GeoJSON tanpa membuat layer */
+    var s = 90, n = -90, w = 180, e = -180, ada = false;
+    function jalan(k){
+      if (typeof k[0] === 'number'){ ada = true;
+        if (k[1] < s) s = k[1]; if (k[1] > n) n = k[1]; if (k[0] < w) w = k[0]; if (k[0] > e) e = k[0]; return; }
+      for (var i = 0; i < k.length; i++) jalan(k[i]);
+    }
+    fitur.forEach(function(f){ if (f.geometry && f.geometry.coordinates) jalan(f.geometry.coordinates); });
+    return ada ? L.latLngBounds([s, w], [n, e]) : null;
+  }
+  function zoomBatch(k){
+    var c = aktif && cache[aktif], it = c && c.batch[k]; if (!it) return;
+    if (!it.bb) it.bb = batasFitur(it.feat);
+    if (!it.on){ aturBatch(c, k, true); isiPanelBatch(); }
+    if (it.bb) peta.fitBounds(it.bb, padFit());
+  }
   function redupkanActual(){
-    var c = aktif && cache[aktif], ada = false;
+    var c = aktif && cache[aktif], ada = false, dim = document.getElementById('pb-dim');
     if (c){ Object.keys(c.batch).forEach(function(k){ if (c.batch[k].on) ada = true; }); }
-    var dim = pbDiv ? pbDiv.querySelector('.pb-dim') : null;
-    peta.getPane('paneCov').style.opacity = (ada && dim && dim.checked) ? '0.2' : '';
+    peta.getPane('paneCov').style.opacity = (BATCH_ON && ada && dim && dim.checked) ? '0.2' : '';
   }
   function isiPanelBatch(){
-    if (!pbDiv) return;
-    var c = aktif && cache[aktif], list = pbDiv.querySelector('.pb-list'), n = 0, tot = 0;
+    if (!BATCH_ON){ isiLegend(); return; }
+    var c = aktif && cache[aktif], n = 0, tot = 0;
     if (!c || c.batchUrut === null){
-      list.innerHTML = "<div class='pb-info'>loading …</div>";
+      pbList.innerHTML = "<div class='info'>loading …</div>";
     } else if (!c.batchUrut.length){
-      list.innerHTML = "<div class='pb-info'>no batch data for this area yet</div>";
+      pbList.innerHTML = "<div class='info'>no batch data for this area yet</div>";
     } else {
       tot = c.batchUrut.length;
-      list.innerHTML = c.batchUrut.map(function(k){
+      pbList.innerHTML = c.batchUrut.map(function(k){
         var it = c.batch[k]; if (it.on) n++;
-        return "<div class='pb-r" + (it.on ? '' : ' mati') + "' data-b='" + esc(k) + "' title='" +
-               it.nd + (it.nd === 1 ? ' PIC-day' : ' PIC-days') + "'><span class='cb'></span><i" +
-               (it.on ? " style='" + gayaSwatch(it.w) + "'" : '') + "></i><span class='pb-l'>" +
-               esc(namaBatch(k)) + "</span><span class='pb-km'>" + fmtKm(it.km) + "</span></div>";
+        return "<div class='ly" + (it.on ? '' : ' mati') + "' data-b='" + esc(k) + "' title='" +
+               it.nd + (it.nd === 1 ? ' PIC-day' : ' PIC-days') + "'><span class='cb'></span><i class='sw' style='" +
+               (it.on ? gayaSwatch(it.w) : 'background:#3d444d') + "'></i><span class='nm'><b>" +
+               esc(namaBatch(k)) + "</b></span><span class='meta'>" + fmtKm(it.km) + "</span>" +
+               "<button class='zl' title='Zoom to batch'>" + IKON.zoom + "</button></div>";
       }).join('');
     }
-    var el = pbDiv.querySelector('.pb-n');
-    el.textContent = tot ? (n + ' / ' + tot) : '–';
-    el.classList.toggle('on', n > 0);
-    redupkanActual();
+    nBatch = [n, tot];
+    var bd = document.getElementById('pb-badge');
+    if (bd){ bd.hidden = !n; bd.textContent = n; }
+    redupkanActual(); isiLegend(); setChip();
   }
   if (BATCH_ON){
-    var pb = L.control({position:'topright'});
-    pb.onAdd = function(){
-      var d = pbDiv = L.DomUtil.create('div', 'peta-batch');
-      d.innerHTML = "<div class='pb-h' title='show / hide'><span class='pb-t'>ACTUAL BY BATCH</span>" +
-                    "<span class='pb-n'>–</span><span class='pb-chev'>&#9662;</span></div>" +
-                    "<div class='pb-isi'><div class='pb-aksi'><button data-a='all'>All</button>" +
-                    "<button data-a='none'>None</button><label><input type='checkbox' class='pb-dim' checked>" +
-                    "Dim Actual</label></div><div class='pb-list'></div>" +
-                    "<div class='pb-foot'>off by default &middot; colors follow pick order</div></div>";
-      L.DomEvent.disableClickPropagation(d);
-      L.DomEvent.disableScrollPropagation(d);
-      try { d.classList.toggle('buka', sessionStorage.getItem('maps_pb_buka') === '1'); } catch(e){}
-      d.querySelector('.pb-h').addEventListener('click', function(){
-        var b = !d.classList.contains('buka'); d.classList.toggle('buka', b);
-        try { sessionStorage.setItem('maps_pb_buka', b ? '1' : '0'); } catch(e){}
-      });
-      d.querySelector('.pb-aksi').addEventListener('click', function(e){
-        var t = e.target.closest('button'), c = aktif && cache[aktif];
-        if (!t || !c || !c.batchUrut) return;
-        if (t.dataset.a === 'none'){ c.batchUrut.forEach(function(k){ aturBatch(c, k, false); }); }
-        else { c.batchUrut.forEach(function(k){ aturBatch(c, k, true); }); }
-        isiPanelBatch();
-      });
-      d.querySelector('.pb-dim').addEventListener('change', redupkanActual);
-      d.querySelector('.pb-list').addEventListener('click', function(e){
-        var r = e.target.closest('.pb-r'), c = aktif && cache[aktif];
-        if (!r || !c || !c.batch[r.dataset.b]) return;
-        aturBatch(c, r.dataset.b, !c.batch[r.dataset.b].on);
-        isiPanelBatch();
-      });
-      return d;
-    };
-    pb.addTo(peta);
+    laci.querySelector("section[data-p='batch'] .alat").addEventListener('click', function(e){
+      var t = e.target.closest('button'), c = aktif && cache[aktif];
+      if (!t || !c || !c.batchUrut) return;
+      c.batchUrut.forEach(function(k){ aturBatch(c, k, t.dataset.a === 'all'); });
+      isiPanelBatch();
+    });
+    document.getElementById('pb-dim').addEventListener('change', redupkanActual);
+    pbList.addEventListener('click', function(e){
+      var r = e.target.closest('.ly'), c = aktif && cache[aktif];
+      if (!r || !c || !c.batch[r.dataset.b]) return;
+      if (e.target.closest('.zl')){ zoomBatch(r.dataset.b); return; }
+      aturBatch(c, r.dataset.b, !c.batch[r.dataset.b].on);
+      isiPanelBatch();
+    });
   }
 
   /* loader geojson: sadar format PartsIndex {"parts":[...]} */
@@ -530,32 +685,67 @@ border-radius:8px;box-shadow:0 6px 22px rgba(0,0,0,.55)}
   }
 
   function _pmKat(d){ d = (d || '').toLowerCase();
-    if (d.indexOf('accident') >= 0 || d.indexOf('kecelakaan') >= 0) return ['🏍', '#ff5252', '💥'];
-    if (d.indexOf('crime') >= 0 || d.indexOf('kriminal') >= 0)      return ['🚨', '#e040fb'];
-    if (d.indexOf('flood') >= 0 || d.indexOf('banjir') >= 0)        return ['🌊', '#40c4ff'];
-    if (d.indexOf('damage') >= 0 || d.indexOf('rusak') >= 0)        return ['🚧', '#ff9100'];
+    if (d.indexOf('accident') >= 0 || d.indexOf('kecelakaan') >= 0) return ['🏍', '#ff5252', '💥', 'Traffic Accident'];
+    if (d.indexOf('crime') >= 0 || d.indexOf('kriminal') >= 0)      return ['🚨', '#e040fb', '', 'High-Crime Area'];
+    if (d.indexOf('flood') >= 0 || d.indexOf('banjir') >= 0)        return ['🌊', '#40c4ff', '', 'Flood'];
+    if (d.indexOf('damage') >= 0 || d.indexOf('rusak') >= 0)        return ['🚧', '#ff9100', '', 'Road Damage'];
     if (d.indexOf('no entry') >= 0 || d.indexOf('restrict') >= 0 || d.indexOf('limited') >= 0)
-                                                                    return ['⛔', '#ff1744'];
-    if (d.indexOf('animal') >= 0 || d.indexOf('hewan') >= 0)        return ['🐍', '#8bc34a'];
-    return ['📍', '#90a4ae']; }
+                                                                    return ['⛔', '#ff1744', '', 'No Entry / Restricted'];
+    if (d.indexOf('animal') >= 0 || d.indexOf('hewan') >= 0)        return ['🐍', '#8bc34a', '', 'Animal'];
+    return ['📍', '#90a4ae', '', 'Other placemark']; }
   function ikonPM(d){ var k = _pmKat(d);
     return L.divIcon({className:'', iconSize:[28,28], iconAnchor:[14,14], popupAnchor:[0,-16],
       html:"<div class='pm-badge' style='border-color:" + k[1] + "'>" + k[0] +
            (k[2] ? "<span class='pm-x'>" + k[2] + "</span>" : "") + "</div>"}); }
 
+  /* panel LEGEND: simbol layer yang ada di area ini (yang disembunyikan tampil redup) */
+  var lgList = document.getElementById('lg-list');
+  function isiLegend(){
+    var c = aktif && cache[aktif];
+    function item(k, sw, nama, ekor){
+      return "<div class='lg-i" + (k && !tampil[k] ? ' mati' : '') + "'>" + sw + "<span>" + nama + "</span>" +
+             (ekor ? "<em>" + ekor + "</em>" : '') + "</div>"; }
+    function grup(judul, isi){ return "<div class='lg-g'><div class='jd'>" + judul + "</div>" + isi + "</div>"; }
+    var h = grup('Plan &middot; RoadMap HERE', item('all', LAYER.all[2], 'Plan All') +
+                item('fc4', LAYER.fc4[2], 'Plan FC4') + item('fc5', LAYER.fc5[2], 'Plan FC5')) +
+            grup('Survey', item('cov', LAYER.cov[2], 'Actual (nett coverage)') +
+                item('uc', LAYER.uc[2], 'Uncovered Cluster')) +
+            grup('Administrative', item('adm', LAYER.adm[2], 'Admin Boundary') +
+                item('adm', "<span class='sw-lbl'>Kota</span>", 'Region name'));
+    var kat = {}, urut = [];
+    if (c){ tiapTitik(c.gPM, function(m){
+      var k = _pmKat(((m.feature || {}).properties || {}).d);
+      if (!kat[k[3]]){ kat[k[3]] = {k:k, n:0}; urut.push(k[3]); }
+      kat[k[3]].n++; }); }
+    if (!urut.length){ ['accident', 'crime'].forEach(function(d){
+      var k = _pmKat(d); kat[k[3]] = {k:k, n:0}; urut.push(k[3]); }); }
+    h += grup('Placemark', urut.map(function(nm){ var x = kat[nm];
+      return item('pm', "<b class='pm-mini' style='border-color:" + x.k[1] + "'>" + x.k[0] +
+                  (x.k[2] ? "<i class='pm-xm'>" + x.k[2] + "</i>" : '') + "</b>", nm, x.n ? angka(x.n) : '');
+    }).join(''));
+    if (c && c.batchUrut){
+      var on = c.batchUrut.filter(function(k){ return c.batch[k].on; });
+      if (on.length){ h += grup('Actual by Batch', on.map(function(k){ var it = c.batch[k];
+        return item(null, "<i class='sw' style='" + gayaSwatch(it.w) + "'></i>", esc(namaBatch(k)), fmtKm(it.km));
+      }).join('')); }
+    }
+    lgList.innerHTML = h;
+  }
+
   var cache = {}, aktif = null;
   var muat = document.getElementById('mmuat');
 
   function terapkanTampil(){
-    if (!aktif || !cache[aktif]) return; var c = cache[aktif];
-    var ps = document.getElementById('pm-sub');
-    if (ps) ps.style.display = tampil.pm ? '' : 'none';
+    isiLayer(); setChip();
+    if (!aktif || !cache[aktif]){ isiLegend(); return; }
+    var c = cache[aktif];
     [['all',c.gAll],['fc5',c.gFC5],['fc4',c.gFC4],['cov',c.gCov],['adm',c.gAdm],['uc',c.gUC],['pm',c.gPM]].forEach(function(p){
       if (tampil[p[0]]){ p[1].addTo(peta); } else { peta.removeLayer(p[1]); }
     });
     if (BATCH_ON){ c.gBatch.addTo(peta); }
     redupkanActual();
     aturLabel();
+    isiLegend();
   }
   function aturLabel(){
     if (!aktif || !cache[aktif]) return; var c = cache[aktif], z = peta.getZoom();
@@ -594,11 +784,13 @@ border-radius:8px;box-shadow:0 6px 22px rgba(0,0,0,.55)}
     var c = { gAll:L.featureGroup(), gFC4:L.featureGroup(), gFC5:L.featureGroup(),
               gCov:L.featureGroup(), gUC:L.featureGroup(),
               gAdm:L.featureGroup(), gPM:L.featureGroup(), gLbl:L.layerGroup(), siap:0,
-              lblUrut:[], gBatch:L.layerGroup(), batch:{}, batchUrut:null };
+              lblUrut:[], gBatch:L.layerGroup(), batch:{}, batchUrut:null,
+              st:{all:'muat', fc4:'muat', fc5:'muat', cov:'muat', uc:'muat', adm:'muat', pm:'muat'} };
     cache[a.kode] = c;
     muat.textContent = 'loading ' + a.nama + ' layers …';
     muat.classList.add('on');
     function cek(){ c.siap++; if (c.siap >= 2){ muat.classList.remove('on'); } }
+    function status(kunci, ok){ kunci.forEach(function(k){ c.st[k] = ok ? 'ok' : 'tidak'; }); }
     var bust = '?v=' + Math.floor(Date.now() / 600000);
     muatGeo(a.kode + '_roadmap.geojson', '', null,
       function(chunk){
@@ -616,6 +808,7 @@ border-radius:8px;box-shadow:0 6px 22px rgba(0,0,0,.55)}
         });
       },
       function(ok){ if(!ok){ muat.textContent = a.nama + ' roadmap not available yet'; } cek();
+                    status(['all', 'fc4', 'fc5'], ok);
                     if (aktif === a.kode) terapkanTampil(); });
     muatGeo(a.kode + '_placemark.geojson', bust,
       {pointToLayer:function(f, ll){
@@ -632,18 +825,18 @@ border-radius:8px;box-shadow:0 6px 22px rgba(0,0,0,.55)}
                       (p.d || 'Placemark') + "</div>" +
                       "<div class='pm-inf'>" + (p.i || '&ndash;') + "</div></div>");
        }}, c.gPM,
-      function(ok){ if (aktif === a.kode) terapkanTampil(); });
+      function(ok){ status(['pm'], ok); if (aktif === a.kode) terapkanTampil(); });
     muatGeo(a.kode + '_uncovered.geojson', bust,
       {style:{color:'#ffd600', weight:2, opacity:1}, smoothFactor:1.6,
        pane:'paneUC', renderer:rUC}, c.gUC,
-      function(ok){ if (aktif === a.kode) terapkanTampil(); });
+      function(ok){ status(['uc'], ok); if (aktif === a.kode) terapkanTampil(); });
     muatGeo(a.kode + '_coverage.geojson', bust, null,
       function(chunk){
         L.geoJSON(chunk, {style:{color:'#00e5ff', weight:2, opacity:1}, smoothFactor:1.4,
           pane:'paneCov', renderer:rCov}).addTo(c.gCov);
         catatBatch(c, chunk);
       },
-      function(ok){ cek(); siapkanBatch(c);
+      function(ok){ cek(); siapkanBatch(c); status(['cov'], ok);
                     if (aktif === a.kode){ terapkanTampil(); isiPanelBatch(); } });
     fetch('geo/' + a.kode + '_admin.geojson')
       .then(function(r){ if(!r.ok) throw 0; return r.json(); })
@@ -664,9 +857,10 @@ border-radius:8px;box-shadow:0 6px 22px rgba(0,0,0,.55)}
             c.lblUrut.push(mk); mk.addTo(c.gLbl);
          });
          c.lblUrut.sort(function(x, y){ return y._luas - x._luas; });   // wilayah besar didahulukan
+         status(['adm'], true);
          if (aktif === a.kode) terapkanTampil();
       })
-      .catch(function(){});
+      .catch(function(){ status(['adm'], false); if (aktif === a.kode) terapkanTampil(); });
   }
 
   function pilih(a, tombol){
@@ -698,6 +892,10 @@ border-radius:8px;box-shadow:0 6px 22px rgba(0,0,0,.55)}
     }
     seg.appendChild(b);
   });
+  var laciTersimpan = null;
+  try { laciTersimpan = sessionStorage.getItem('maps_laci'); } catch(e){}
+  bukaLaci(laciTersimpan || null);
+  terapkanTampil();
   if (awal){ pilih(awal, awalBtn); }
   else { muat.textContent = 'no area with map data yet'; muat.classList.add('on'); }
 })();
