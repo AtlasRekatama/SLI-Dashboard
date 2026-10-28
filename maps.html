@@ -219,9 +219,54 @@ border-radius:8px;box-shadow:0 6px 22px rgba(0,0,0,.55)}
 .pm-duo{position:relative;display:inline-block;margin-right:7px}
 .pm-duo-x{position:absolute;top:-3px;right:-7px;font-size:.78em}
 .pm-inf{font-size:12.5px;color:#cbd5df}
-.adm-label{color:#ffd60a;font-size:11px;font-weight:700;letter-spacing:.4px;
- white-space:nowrap;text-shadow:0 0 3px #000,0 0 6px #000,0 1px 2px #000;
- transform:translate(-50%,-50%)}
+.adm-label{pointer-events:none}
+.adm-label span{display:block;transform:translate(-50%,-50%);white-space:nowrap;
+ color:#ffffff;font-size:11px;font-weight:700;letter-spacing:.04em;line-height:1.3}
+.adm-label.mask span{padding:2px 8px 3px;border-radius:6px;background:rgba(9,12,17,.74);
+ border:1px solid rgba(255,255,255,.32);box-shadow:0 2px 10px rgba(0,0,0,.6);
+ -webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);text-shadow:0 1px 2px #000}
+.adm-label.buffer span{text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000,
+ 0 -2px 0 #000,0 2px 0 #000,-2px 0 0 #000,2px 0 0 #000,0 0 6px #000,0 0 10px #000}
+.peta-batch{background:linear-gradient(160deg,rgba(22,27,34,.97),rgba(13,17,23,.94));
+ border:1px solid #3d444d;border-radius:12px;box-shadow:0 8px 28px #000a;color:#c9d1d9;
+ font-size:12px;user-select:none;width:236px;overflow:hidden}
+.peta-batch .pb-h{display:flex;align-items:center;gap:8px;padding:10px 13px;cursor:pointer;
+ font-size:9.5px;letter-spacing:.2em;color:#8b949e}
+.peta-batch .pb-h:hover{color:#c9d1d9}
+.peta-batch .pb-t{flex:1;white-space:nowrap}
+.peta-batch .pb-n{font:700 10px/1 'Cascadia Code','Consolas',monospace;letter-spacing:0;color:#8b949e;
+ background:#21262d;border:1px solid #3d444d;border-radius:20px;padding:3px 8px;white-space:nowrap}
+.peta-batch .pb-n.on{color:#3fb950;border-color:#3fb95066;background:#16351f}
+.peta-batch .pb-chev{font-size:10px;transition:transform .2s}
+.peta-batch.buka .pb-chev{transform:rotate(180deg)}
+.peta-batch .pb-isi{display:none;border-top:1px solid #30363d;padding:8px 13px 10px}
+.peta-batch.buka .pb-isi{display:block}
+.peta-batch .pb-aksi{display:flex;align-items:center;gap:6px;margin-bottom:5px}
+.peta-batch .pb-aksi button{background:#21262d;border:1px solid #3d444d;color:#c9d1d9;font:inherit;
+ font-size:9.5px;letter-spacing:.05em;border-radius:20px;padding:3px 10px;cursor:pointer}
+.peta-batch .pb-aksi button:hover{background:#30363d;border-color:#58a6ff}
+.peta-batch .pb-aksi label{margin-left:auto;display:flex;align-items:center;gap:5px;font-size:10px;
+ color:#8b949e;cursor:pointer;white-space:nowrap}
+.peta-batch .pb-aksi input{accent-color:#3fb950;margin:0;cursor:pointer}
+.peta-batch .pb-list{max-height:min(50vh,430px);overflow-y:auto;margin:0 -13px;padding:0 13px}
+.peta-batch .pb-r{display:flex;align-items:center;gap:9px;padding:5px 7px;margin:1px -7px;
+ border-radius:7px;cursor:pointer;min-height:26px}
+.peta-batch .pb-r:hover{background:#ffffff0d}
+.peta-batch .pb-r.mati .pb-l{color:#8b949e}
+.peta-batch .pb-r i{display:inline-block;width:24px;height:3px;border-radius:2px;background:#3d444d;flex:0 0 auto}
+.peta-batch .pb-l{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.peta-batch .pb-km{font:11px 'Cascadia Code','Consolas',monospace;color:#8b949e;white-space:nowrap}
+.peta-batch .pb-r:not(.mati) .pb-km{color:#c9d1d9}
+.peta-batch .cb{width:13px;height:13px;border:1px solid #4a5361;border-radius:3px;position:relative;
+ flex:0 0 auto;background:#0d1117}
+.peta-batch .pb-r:not(.mati) .cb{background:#16351f;border-color:#3fb950}
+.peta-batch .pb-r:not(.mati) .cb::after{content:'';position:absolute;left:4px;top:1px;width:3px;height:7px;
+ border:solid #3fb950;border-width:0 2px 2px 0;transform:rotate(45deg)}
+.peta-batch .pb-info{font-size:11px;color:#8b949e;padding:6px 0}
+.peta-batch .pb-foot{font-size:9.5px;color:#6e7681;margin-top:7px;padding-top:6px;border-top:1px solid #30363d}
+.leaflet-top.leaflet-right{z-index:1001}   /* panel batch terbuka di atas legend kiri (layar sempit) */
+@media(max-width:900px){.peta-batch{width:204px}.peta-batch .pb-h{letter-spacing:.1em;padding:9px 11px}
+ .peta-batch .pb-list{max-height:30vh}}
 .mfoot{display:flex;gap:16px;padding:9px 22px;background:#0a0e13;border-top:1px solid #21262d;
  font-size:10px;letter-spacing:.12em;color:#8b949e;flex-wrap:wrap}
 .mfoot b{color:#c9d1d9;font-weight:600}
@@ -243,11 +288,11 @@ border-radius:8px;box-shadow:0 6px 22px rgba(0,0,0,.55)}
 <div class='mfoot'>
   <span>MAPS &middot; map page &mdash; <b>no auto-refresh</b>, position &amp; zoom saved per area</span>
   <span>layers load per selected area (lazy) &middot; switching back is instant</span>
-  <span class='kanan'>data run 27 Oct 2026 10:54</span>
+  <span class='kanan'>data run 28 Oct 2026 11:42</span>
 </div>
 <script>
 (function(){
-  var AREA = [{"kode": "jabodetabek", "nama": "JABODETABEK", "ada": true, "view": [-6.3, 106.85, 10], "net": "22,135.42", "unc": "21,526.63", "tgt": "39,492.33", "prog": "56.0%"}, {"kode": "bandung", "nama": "BANDUNG RAYA", "ada": true, "view": [-6.905, 107.61, 11], "net": "8,948.00", "unc": "8,747.92", "tgt": "14,849.83", "prog": "60.3%"}, {"kode": "surabaya", "nama": "SURABAYA", "ada": true, "view": [-7.28, 112.74, 12], "net": "2,804.05", "unc": "1,967.85", "tgt": "3,862.86", "prog": "72.6%"}];
+  var AREA = [{"kode": "jabodetabek", "nama": "JABODETABEK", "ada": true, "view": [-6.3, 106.85, 10], "net": "22,416.70", "unc": "21,461.61", "tgt": "39,492.33", "prog": "56.8%"}, {"kode": "bandung", "nama": "BANDUNG RAYA", "ada": true, "view": [-6.905, 107.61, 11], "net": "8,948.00", "unc": "8,747.92", "tgt": "14,849.83", "prog": "60.3%"}, {"kode": "surabaya", "nama": "SURABAYA", "ada": true, "view": [-7.28, 112.74, 12], "net": "2,804.05", "unc": "1,967.85", "tgt": "3,862.86", "prog": "72.6%"}];
   var peta = L.map('peta', {preferCanvas:true});
   var PANE = {all:'paneAll', fc5:'paneFC5', fc4:'paneFC4', cov:'paneCov',
               uc:'paneUC', adm:'paneAdm', pm:'panePM'};
@@ -255,6 +300,15 @@ border-radius:8px;box-shadow:0 6px 22px rgba(0,0,0,.55)}
   var rAll = L.canvas({pane:'paneAll'}),  rFC5 = L.canvas({pane:'paneFC5'}),
       rFC4 = L.canvas({pane:'paneFC4'}), rCov = L.canvas({pane:'paneCov'}),
       rAdm = L.canvas({pane:'paneAdm'}), rUC  = L.canvas({pane:'paneUC'});
+  /* layer garis tak bisa diklik -> kanvasnya tembus klik (placemark tetap bisa diklik walau di bawahnya) */
+  ['all','fc5','fc4','cov','uc','adm'].forEach(function(k){ peta.getPane(PANE[k]).style.pointerEvents = 'none'; });
+  var BATCH_ON = true, WBATCH = ["#ff9100", "#448aff", "#ff4081", "#c6ff00", "#e040fb", "#1de9b6", "#ffffff"], POLA = [null, '9 7'];
+  peta.createPane('paneBatch');
+  peta.getPane('paneBatch').style.zIndex = 451;           // di atas semua layer garis
+  peta.getPane('paneBatch').style.pointerEvents = 'none';
+  var rBatch = L.canvas({pane:'paneBatch'}), pbDiv = null;
+  function esc(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, function(ch){
+    return {'&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'}[ch]; }); }
   function susunPane(d){
     var urut = [].slice.call(d.querySelectorAll('[data-l]')).map(function(x){ return x.dataset.l; });
     urut.forEach(function(k, i){
@@ -344,6 +398,115 @@ border-radius:8px;box-shadow:0 6px 22px rgba(0,0,0,.55)}
     return d;
   };
   legend.addTo(peta);
+  /* panel ACTUAL BY BATCH (kanan-atas, terpisah dari legend kiri): default semua mati */
+  function namaBatch(k){ return /^[0-9]+$/.test(k) ? 'Batch ' + k : (k || 'No batch yet'); }
+  function fmtKm(v){ return (+v || 0).toLocaleString('en-US', {minimumFractionDigits:2,
+                                                              maximumFractionDigits:2}) + ' km'; }
+  function catatBatch(c, fc){
+    (fc.features || []).forEach(function(f){
+      var p = f.properties || {};
+      if (p.b === undefined || p.b === null) return;          // geojson lama: tanpa label batch
+      var k = String(p.b), it = c.batch[k];
+      if (!it){ it = c.batch[k] = {feat:[], km:+p.kb || 0, nd:+p.nd || 0, on:false, w:null, layer:null}; }
+      it.feat.push(f);
+    });
+  }
+  function siapkanBatch(c){
+    function r(s){ return /^[0-9]+$/.test(s) ? [0, +s, ''] : (s ? [1, 0, s.toLowerCase()] : [2, 0, '']); }
+    c.batchUrut = Object.keys(c.batch).sort(function(x, y){
+      var a = r(x), b = r(y);
+      return a[0] - b[0] || a[1] - b[1] || (a[2] < b[2] ? -1 : (a[2] > b[2] ? 1 : 0)); });
+  }
+  function gayaSwatch(w){
+    return w[1] ? 'background:repeating-linear-gradient(90deg,' + w[0] + ' 0 6px,transparent 6px 10px)'
+                : 'background:' + w[0];
+  }
+  function warnaBebas(c){          /* warna + pola pertama yang belum dipakai batch lain yang tampil */
+    var pakai = {};
+    Object.keys(c.batch).forEach(function(k){ var w = c.batch[k].w; if (w) pakai[w[0] + w[1]] = 1; });
+    for (var p = 0; p < POLA.length; p++){
+      for (var i = 0; i < WBATCH.length; i++){ if (!pakai[WBATCH[i] + p]) return [WBATCH[i], p]; } }
+    return [WBATCH[0], 0];
+  }
+  function layerBatch(it){
+    var fc = {type:'FeatureCollection', features:it.feat}, g = L.layerGroup();
+    L.geoJSON(fc, {style:{color:'#05070a', weight:6.5, opacity:.85, lineCap:'round', lineJoin:'round'},
+      smoothFactor:1.4, pane:'paneBatch', renderer:rBatch, interactive:false}).addTo(g);
+    L.geoJSON(fc, {style:{color:it.w[0], weight:3.2, opacity:1, dashArray:POLA[it.w[1]],
+      lineCap:(it.w[1] ? 'butt' : 'round'), lineJoin:'round'},
+      smoothFactor:1.4, pane:'paneBatch', renderer:rBatch, interactive:false}).addTo(g);
+    return g;
+  }
+  function aturBatch(c, k, nyala){
+    var it = c.batch[k];
+    if (!it || it.on === nyala) return;
+    if (it.layer){ c.gBatch.removeLayer(it.layer); it.layer = null; }
+    it.on = nyala; it.w = null;
+    if (nyala){ it.w = warnaBebas(c); it.layer = layerBatch(it); c.gBatch.addLayer(it.layer); }
+  }
+  function redupkanActual(){
+    var c = aktif && cache[aktif], ada = false;
+    if (c){ Object.keys(c.batch).forEach(function(k){ if (c.batch[k].on) ada = true; }); }
+    var dim = pbDiv ? pbDiv.querySelector('.pb-dim') : null;
+    peta.getPane('paneCov').style.opacity = (ada && dim && dim.checked) ? '0.2' : '';
+  }
+  function isiPanelBatch(){
+    if (!pbDiv) return;
+    var c = aktif && cache[aktif], list = pbDiv.querySelector('.pb-list'), n = 0, tot = 0;
+    if (!c || c.batchUrut === null){
+      list.innerHTML = "<div class='pb-info'>loading …</div>";
+    } else if (!c.batchUrut.length){
+      list.innerHTML = "<div class='pb-info'>no batch data for this area yet</div>";
+    } else {
+      tot = c.batchUrut.length;
+      list.innerHTML = c.batchUrut.map(function(k){
+        var it = c.batch[k]; if (it.on) n++;
+        return "<div class='pb-r" + (it.on ? '' : ' mati') + "' data-b='" + esc(k) + "' title='" +
+               it.nd + (it.nd === 1 ? ' PIC-day' : ' PIC-days') + "'><span class='cb'></span><i" +
+               (it.on ? " style='" + gayaSwatch(it.w) + "'" : '') + "></i><span class='pb-l'>" +
+               esc(namaBatch(k)) + "</span><span class='pb-km'>" + fmtKm(it.km) + "</span></div>";
+      }).join('');
+    }
+    var el = pbDiv.querySelector('.pb-n');
+    el.textContent = tot ? (n + ' / ' + tot) : '–';
+    el.classList.toggle('on', n > 0);
+    redupkanActual();
+  }
+  if (BATCH_ON){
+    var pb = L.control({position:'topright'});
+    pb.onAdd = function(){
+      var d = pbDiv = L.DomUtil.create('div', 'peta-batch');
+      d.innerHTML = "<div class='pb-h' title='show / hide'><span class='pb-t'>ACTUAL BY BATCH</span>" +
+                    "<span class='pb-n'>–</span><span class='pb-chev'>&#9662;</span></div>" +
+                    "<div class='pb-isi'><div class='pb-aksi'><button data-a='all'>All</button>" +
+                    "<button data-a='none'>None</button><label><input type='checkbox' class='pb-dim' checked>" +
+                    "Dim Actual</label></div><div class='pb-list'></div>" +
+                    "<div class='pb-foot'>off by default &middot; colors follow pick order</div></div>";
+      L.DomEvent.disableClickPropagation(d);
+      L.DomEvent.disableScrollPropagation(d);
+      try { d.classList.toggle('buka', sessionStorage.getItem('maps_pb_buka') === '1'); } catch(e){}
+      d.querySelector('.pb-h').addEventListener('click', function(){
+        var b = !d.classList.contains('buka'); d.classList.toggle('buka', b);
+        try { sessionStorage.setItem('maps_pb_buka', b ? '1' : '0'); } catch(e){}
+      });
+      d.querySelector('.pb-aksi').addEventListener('click', function(e){
+        var t = e.target.closest('button'), c = aktif && cache[aktif];
+        if (!t || !c || !c.batchUrut) return;
+        if (t.dataset.a === 'none'){ c.batchUrut.forEach(function(k){ aturBatch(c, k, false); }); }
+        else { c.batchUrut.forEach(function(k){ aturBatch(c, k, true); }); }
+        isiPanelBatch();
+      });
+      d.querySelector('.pb-dim').addEventListener('change', redupkanActual);
+      d.querySelector('.pb-list').addEventListener('click', function(e){
+        var r = e.target.closest('.pb-r'), c = aktif && cache[aktif];
+        if (!r || !c || !c.batch[r.dataset.b]) return;
+        aturBatch(c, r.dataset.b, !c.batch[r.dataset.b].on);
+        isiPanelBatch();
+      });
+      return d;
+    };
+    pb.addTo(peta);
+  }
 
   /* loader geojson: sadar format PartsIndex {"parts":[...]} */
   function muatGeo(nama, bust, gaya, grup, selesai){
@@ -390,12 +553,26 @@ border-radius:8px;box-shadow:0 6px 22px rgba(0,0,0,.55)}
     [['all',c.gAll],['fc5',c.gFC5],['fc4',c.gFC4],['cov',c.gCov],['adm',c.gAdm],['uc',c.gUC],['pm',c.gPM]].forEach(function(p){
       if (tampil[p[0]]){ p[1].addTo(peta); } else { peta.removeLayer(p[1]); }
     });
+    if (BATCH_ON){ c.gBatch.addTo(peta); }
+    redupkanActual();
     aturLabel();
   }
   function aturLabel(){
     if (!aktif || !cache[aktif]) return; var c = cache[aktif], z = peta.getZoom();
-    if (tampil.adm && z >= 9 && z <= 14){ c.gLbl.addTo(peta); }
+    if (tampil.adm && z >= 9 && z <= 14){ c.gLbl.addTo(peta); rapikanLabel(c); }
     else { peta.removeLayer(c.gLbl); }
+  }
+  function rapikanLabel(c){   /* label yang bertabrakan: wilayah lebih kecil disembunyikan (muncul lagi saat zoom-in) */
+    var ada = [];
+    c.lblUrut.forEach(function(mk){
+      var el = mk.getElement(), s = el && el.firstChild;
+      if (!s) return;
+      s.style.visibility = '';
+      var r = s.getBoundingClientRect();
+      var tabrak = ada.some(function(q){ return r.left < q.right + 6 && r.right > q.left - 6 &&
+                                                r.top < q.bottom + 3 && r.bottom > q.top - 3; });
+      if (tabrak){ s.style.visibility = 'hidden'; } else { ada.push(r); }
+    });
   }
   peta.on('zoomend', aturLabel);
   peta.on('moveend', function(){
@@ -416,7 +593,8 @@ border-radius:8px;box-shadow:0 6px 22px rgba(0,0,0,.55)}
   function muatArea(a){
     var c = { gAll:L.featureGroup(), gFC4:L.featureGroup(), gFC5:L.featureGroup(),
               gCov:L.featureGroup(), gUC:L.featureGroup(),
-              gAdm:L.featureGroup(), gPM:L.featureGroup(), gLbl:L.layerGroup(), siap:0 };
+              gAdm:L.featureGroup(), gPM:L.featureGroup(), gLbl:L.layerGroup(), siap:0,
+              lblUrut:[], gBatch:L.layerGroup(), batch:{}, batchUrut:null };
     cache[a.kode] = c;
     muat.textContent = 'loading ' + a.nama + ' layers …';
     muat.classList.add('on');
@@ -459,10 +637,14 @@ border-radius:8px;box-shadow:0 6px 22px rgba(0,0,0,.55)}
       {style:{color:'#ffd600', weight:2, opacity:1}, smoothFactor:1.6,
        pane:'paneUC', renderer:rUC}, c.gUC,
       function(ok){ if (aktif === a.kode) terapkanTampil(); });
-    muatGeo(a.kode + '_coverage.geojson', bust,
-      {style:{color:'#00e5ff', weight:2, opacity:1}, smoothFactor:1.4,
-       pane:'paneCov', renderer:rCov}, c.gCov,
-      function(ok){ cek(); if (aktif === a.kode) terapkanTampil(); });
+    muatGeo(a.kode + '_coverage.geojson', bust, null,
+      function(chunk){
+        L.geoJSON(chunk, {style:{color:'#00e5ff', weight:2, opacity:1}, smoothFactor:1.4,
+          pane:'paneCov', renderer:rCov}).addTo(c.gCov);
+        catatBatch(c, chunk);
+      },
+      function(ok){ cek(); siapkanBatch(c);
+                    if (aktif === a.kode){ terapkanTampil(); isiPanelBatch(); } });
     fetch('geo/' + a.kode + '_admin.geojson')
       .then(function(r){ if(!r.ok) throw 0; return r.json(); })
       .then(function(g){
@@ -475,9 +657,13 @@ border-radius:8px;box-shadow:0 6px 22px rgba(0,0,0,.55)}
          (g.features || []).forEach(function(f){
             if (!f.properties || f.properties.t !== 'l') return;
             var k = f.geometry.coordinates;
-            L.marker([k[1], k[0]], {interactive:false, icon:L.divIcon(
-              {className:'adm-label', html:f.properties.n, iconSize:null})}).addTo(c.gLbl);
+            var mk = L.marker([k[1], k[0]], {interactive:false, keyboard:false, icon:L.divIcon(
+              {className:'adm-label mask', html:'<span>' + esc(f.properties.n) + '</span>',
+               iconSize:null})});
+            mk._luas = +f.properties.a || 0;
+            c.lblUrut.push(mk); mk.addTo(c.gLbl);
          });
+         c.lblUrut.sort(function(x, y){ return y._luas - x._luas; });   // wilayah besar didahulukan
          if (aktif === a.kode) terapkanTampil();
       })
       .catch(function(){});
@@ -491,11 +677,12 @@ border-radius:8px;box-shadow:0 6px 22px rgba(0,0,0,.55)}
     document.getElementById('s-unc').textContent  = a.unc;
     document.getElementById('s-tgt').textContent  = a.tgt;
     if (aktif && cache[aktif]){ var l = cache[aktif];
-      [l.gAll, l.gFC4, l.gFC5, l.gCov, l.gUC, l.gAdm, l.gPM, l.gLbl].forEach(function(g){ peta.removeLayer(g); }); }
+      [l.gAll, l.gFC4, l.gFC5, l.gCov, l.gUC, l.gAdm, l.gPM, l.gLbl, l.gBatch].forEach(function(g){ peta.removeLayer(g); }); }
     aktif = a.kode;
     try { sessionStorage.setItem('maps_area', a.kode); } catch(e){}
     pulihkanView(a);
     if (!cache[a.kode]){ muatArea(a); } else { terapkanTampil(); }
+    isiPanelBatch();
   }
 
   /* tombol pemilih area dibangun dari config */
